@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Anniversary Kahal & Zaid!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffb3b3);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Montserrat", sans-serif;
+        overflow: hidden;
+      }
+
+      .card-container {
+        position: relative;
+        width: 400px;
+        height: 500px;
+        perspective: 1000px;
+      }
+
+      .card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: all 1s ease;
+        cursor: pointer;
+      }
+
+      .card.open {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-inner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-front {
+        background: #ffffff;
+        transform: rotateY(0deg);
+      }
+
+      .card-inner {
+        background: linear-gradient(45deg, #ff758c, #ff7eb3);
+        transform: rotateY(180deg);
+        color: white;
+      }
+
+      .hearts {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+      }
+
+      .hearts span {
+        position: absolute;
+        color: #ff4d4d;
+        font-size: 20px;
+        animation: float 6s linear infinite;
+        opacity: 0;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) scale(0);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      h1 {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .message {
+        text-align: center;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        margin: 20px 0;
+      }
+
+      .couple-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 20px 0;
+        border: 5px solid white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .decorative-border {
+        position: absolute;
+        width: 90%;
+        height: 90%;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+      }
+
+      button {
+        background: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        margin-top: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #ff758c;
+        transition: transform 0.3s ease;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+      }
+
+      .sparkles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .sparkle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        animation: sparkle 1s linear infinite;
+      }
+
+      @keyframes sparkle {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="card" onclick="toggleCard()">
+        <div class="card-front">
+          <div class="hearts">
+            <!-- Hearts will be added dynamically -->
+          </div>
+          <h1>Happy Anniversary</h1>
+          <img
+            src="https://www.shaadidukaan.com/vogue/wp-content/uploads/2019/09/Write-Name-on-Happy-Anniversary-Card-_-Create-Custom-Wishes-2.jpg"
+            alt="Kahal & Zaid"
+            class="couple-photo"
+          />
+          <p>Click to open</p>
+        </div>
+
+        <div class="card-inner">
+          <div class="sparkles">
+            <!-- Sparkles will be added dynamically -->
+          </div>
+          <div class="decorative-border"></div>
+          <h1>Kahal & Zaid</h1>
+          <div class="message">
+            <p>
+              Wishing you both endless love and happiness<br />
+              as you celebrate another year of togetherness!<br />
+              May your bond grow stronger with each passing year.<br />
+              Happy Anniversary!
+            </p>
+          </div>
+          <button
+            onclick="playMusic('C:\\Users\\AI web0.3\\OneDrive\\Desktop\\whishing card\\In the gentle glow of time\'s embrace,  .mp3')"
+          >
+            Play Music
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Audio setup
+      let audio = new Audio("In the gentle glow of time’s embrace,  .mp3"); // Changed to relative path
+      let hasPlayed = false;
+
+      function toggleCard() {
+        const card = document.querySelector(".card");
+        card.classList.toggle("open");
+
+        // Play music only when opening the card
+        if (card.classList.contains("open") && !hasPlayed) {
+          audio.play();
+          hasPlayed = true;
+        }
+      }
+
+      // Create floating hearts
+      const heartsContainer = document.querySelector(".hearts");
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("span");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDelay = Math.random() * 6 + "s";
+        heartsContainer.appendChild(heart);
+      }
+
+      // Create sparkles
+      const sparklesContainer = document.querySelector(".sparkles");
+      for (let i = 0; i < 50; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.style.left = Math.random() * 100 + "%";
+        sparkle.style.top = Math.random() * 100 + "%";
+        sparkle.style.animationDelay = Math.random() * 2 + "s";
+        sparklesContainer.appendChild(sparkle);
+      }
+    </script>
+  </body>
+</html>
